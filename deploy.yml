@@ -39,7 +39,7 @@ items:
         name: hello-java-spring-boot
       spec:
         containers:
-        - image: monodot/hello-java-spring-boot:latest
+        - image: kevinbwusa/hello-java-spring-boot:latest
           imagePullPolicy: IfNotPresent
           name: hello-java-spring-boot
           env:
@@ -51,3 +51,23 @@ items:
           - containerPort: 8080
             protocol: TCP
         restartPolicy: Always
+- apiVersion: build.openshift.io/v1
+  kind: BuildConfig
+  metadata:
+    labels:
+      app.kubernetes.io/name: hello-java-spring-boot
+    name: hello-java-spring-boot
+  spec:
+    output:
+      to:
+        kind: DockerImage
+        name: docker.io/kevinbwusa/hello-java-spring-boot:latest
+    source:
+      # Expect a local directory to be streamed to OpenShift as a build source
+      type: Binary
+      binary: {}
+    strategy:
+      type: Docker
+      dockerStrategy:
+        # Find the image build instructions in ./Dockerfile
+        dockerfilePath: Dockerfile

@@ -1,4 +1,4 @@
-package com.tutorialworks.hellojavaspringboot;
+package com.mycompany.hellojavaspringboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
